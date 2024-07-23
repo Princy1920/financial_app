@@ -1,18 +1,32 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
+
+const TRANSACTION_QUERY = gql`
+  query Transaction($id: ID!) {
+    transaction(id: $id) {
+      id
+      userId
+      description
+      category
+      amount
+      date
+    }
+  }
+`;
 
 const TransactionDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const transaction = {
-    // Example transaction details, replace with actual data
-    id: 1,
-    description: 'Salary',
-    category: 'Income',
-    amount: 5000,
-    date: '2024-07-01'
-  };
+  const { data, loading, error } = useQuery(TRANSACTION_QUERY, {
+    variables: { id }
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const transaction = data.transaction;
 
   return (
     <div>
