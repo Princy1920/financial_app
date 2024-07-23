@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './apolloClient';
-import App from './App';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import TransactionList from './components/TransactionList';
+import AddEditTransaction from './components/AddEditTransaction';
+import TransactionDetails from './components/TransactionDetails';
 import ProtectedRoute from './components/ProtectedRoute';
-import './styles.css'; // Import the global styles
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +16,11 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/*" element={<ProtectedRoute><App /></ProtectedRoute>} />
+          <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/transactions" element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
+          <Route path="/transaction/new" element={<ProtectedRoute><AddEditTransaction /></ProtectedRoute>} />
+          <Route path="/transaction/details/:id" element={<ProtectedRoute><TransactionDetails /></ProtectedRoute>} />
         </Routes>
       </Router>
     </ApolloProvider>

@@ -2,11 +2,11 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { gql, useQuery } from '@apollo/client';
 
+
 const TRANSACTION_QUERY = gql`
   query Transaction($id: ID!) {
     transaction(id: $id) {
       id
-      userId
       description
       category
       amount
@@ -18,28 +18,37 @@ const TRANSACTION_QUERY = gql`
 const TransactionDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const { data, loading, error } = useQuery(TRANSACTION_QUERY, {
-    variables: { id }
+  const { loading, error, data } = useQuery(TRANSACTION_QUERY, {
+    variables: { id },
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  if (!data || !data.transaction) return <p>No transaction found</p>;
 
-  const transaction = data.transaction;
+  const { description, category, amount, date } = data.transaction;
 
   return (
-    <div>
-      <h1>Personal Finance Manager</h1>
-      <button onClick={() => navigate('/transactions')}>Back to List</button>
+    <div className="transaction-details-container">
+      <div className="transaction-details-header">
+        <button onClick={() => navigate('/transactions')}>Back to List</button>
+      </div>
       <h2>Transaction Details</h2>
-      <div>Description: {transaction.description}</div>
-      <div>Category: {transaction.category}</div>
-      <div>Amount: ${transaction.amount}</div>
-      <div>Date: {transaction.date}</div>
       <div>
-        <button onClick={() => navigate(`/transaction/${transaction.id}`)}>Edit</button>
-        <button>Delete</button>
+        <strong>Description:</strong> {description}
+      </div>
+      <div>
+        <strong>Category:</strong> {category}
+      </div>
+      <div>
+        <strong>Amount:</strong> ${amount}
+      </div>
+      <div>
+        <strong>Date:</strong> {date}
+      </div>
+      <div className="transaction-details-buttons">
+        <button onClick={() => navigate(`/transaction/edit/${id}`)}>Edit</button>
+        <button onClick={() => {/* Add delete functionality here */}}>Delete</button>
       </div>
     </div>
   );
