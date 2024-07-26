@@ -37,8 +37,10 @@ const typeDefs = gql`
   }
   type Mutation {
     login(username: String!, password: String!): User
+    register(username: String!, email: String!, password: String!): User
     addTransaction(userId: ID!, description: String!, category: String!, amount: Float!, date: String!): Transaction
     editTransaction(id: ID!, description: String, category: String, amount: Float, date: String): Transaction
+    deleteTransaction(id: ID!): Boolean
   }
 `;
 
@@ -54,6 +56,14 @@ const resolvers = {
       const token = jwt.sign({ id: user.id, username: user.username }, 'your_secret_key', { expiresIn: '1h' });
       return { ...user, token };
     },
+    register: (_, { username, email, password }) => {
+      const existingUser = users.find(user => user.username === username || user.email === email);
+      if (existingUser) throw new Error('User already exists');
+      const newUser = { id: String(users.length + 1), username, email, password };
+      users.push(newUser);
+      const token = jwt.sign({ id: newUser.id, username: newUser.username }, 'your_secret_key', { expiresIn: '1h' });
+      return { ...newUser, token };
+    },
     addTransaction: (_, { userId, description, category, amount, date }) => {
       const newTransaction = { id: String(transactions.length + 1), userId, description, category, amount, date };
       transactions.push(newTransaction);
@@ -67,6 +77,12 @@ const resolvers = {
       if (amount !== undefined) transaction.amount = amount;
       if (date !== undefined) transaction.date = date;
       return transaction;
+    },
+    deleteTransaction: (_, { id }) => {
+      const transactionIndex = transactions.findIndex(transaction => transaction.id === id);
+      if (transactionIndex === -1) throw new Error('Transaction not found');
+      transactions.splice(transactionIndex, 1);
+      return true;
     }
   }
 };

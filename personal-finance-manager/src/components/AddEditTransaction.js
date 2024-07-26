@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-
+import './AddEditTransaction.css';
 
 const ADD_TRANSACTION_MUTATION = gql`
   mutation AddTransaction($userId: ID!, $description: String!, $category: String!, $amount: Float!, $date: String!) {
@@ -17,7 +17,7 @@ const ADD_TRANSACTION_MUTATION = gql`
 
 const AddEditTransaction = () => {
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Income');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState('');
   const navigate = useNavigate();
@@ -35,21 +35,24 @@ const AddEditTransaction = () => {
 
   return (
     <div className="add-edit-transaction-container">
-      <h2>Add/Edit Transaction</h2>
+      <h2>Add Transaction</h2>
       <form className="add-edit-transaction-form">
-        <div>
+        <div className="form-group">
           <label>Description:</label>
           <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Category:</label>
-          <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+          </select>
         </div>
-        <div>
+        <div className="form-group">
           <label>Amount:</label>
           <input type="number" value={amount} onChange={(e) => setAmount(parseFloat(e.target.value))} />
         </div>
-        <div>
+        <div className="form-group">
           <label>Date:</label>
           <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>

@@ -1,25 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
+
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">Finance Dashboard</div>
-      <nav>
-        <ul>
-          <li><Link to="/transactions">Transaction List</Link></li>
-          <li><Link to="/transaction/new">Add/Edit Transaction</Link></li>
-          <li><Link to="/transaction/details">Transaction Details</Link></li>
-          <li><button onClick={() => {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = '/login';
-          }}>Logout</button></li>
-        </ul>
-      </nav>
-      <div className="dashboard-content">
-        <h2>Welcome to your finance dashboard</h2>
+      <div className="navbar">
+        <Link to="/transactions" className="active">Transaction List</Link>
+        <Link to="/transaction/new">Add/Edit Transaction</Link>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      <div className="welcome-message">
+        Welcome to your finance dashboard
       </div>
     </div>
   );

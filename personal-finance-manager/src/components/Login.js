@@ -1,6 +1,7 @@
+// src/components/Login.js
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 const LOGIN_MUTATION = gql`
@@ -47,6 +48,9 @@ const Login = () => {
       </form>
       {loading && <p>Loading...</p>}
       {error && <p className="error-message">Login failed. Please try again.</p>}
+      <div className="register-link">
+        Don't have an account? <Link to="/register">Register</Link>
+      </div>
     </div>
   );
 };
