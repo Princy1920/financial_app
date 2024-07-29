@@ -1,7 +1,6 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const LOGIN_MUTATION = gql`
@@ -34,7 +33,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-header">Personal Finance Manager</div>
+      <h1>Login</h1>
       <form className="login-form">
         <div>
           <label>Username:</label>
@@ -45,12 +44,10 @@ const Login = () => {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <button type="button" onClick={handleLogin}>Login</button>
+        <button type="button" onClick={() => navigate('/register')}>Register</button>
       </form>
       {loading && <p>Loading...</p>}
       {error && <p className="error-message">Login failed. Please try again.</p>}
-      <div className="register-link">
-        Don't have an account? <Link to="/register">Register</Link>
-      </div>
     </div>
   );
 };
