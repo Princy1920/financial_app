@@ -28,6 +28,7 @@ const AddEditTransaction = () => {
       const user = JSON.parse(localStorage.getItem('user'));
       await addTransaction({ variables: { userId: user.id, description, category, amount, date } });
       navigate('/transactions');
+      window.location.reload();
     } catch (err) {
       console.error('Error adding transaction:', err);
     }

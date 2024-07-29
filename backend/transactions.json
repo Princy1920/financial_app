@@ -1,0 +1,42 @@
+[
+  {
+    "id": "0ae5a318-41a2-4ca9-a98f-091d1f866797",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "salary",
+    "category": "Income",
+    "amount": 6000,
+    "date": "2024-07-02"
+  },
+  {
+    "id": "99518d6d-729d-49fd-9808-353a11d4422e",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "rent",
+    "category": "Expense",
+    "amount": 200,
+    "date": "2024-07-03"
+  },
+  {
+    "id": "8a9e1466-2353-459b-a84c-564924006058",
+    "userId": "04855985-1ce5-46c5-a2b4-66519cdf82c8",
+    "description": "hgh",
+    "category": "Income",
+    "amount": 6,
+    "date": "2024-07-05"
+  },
+  {
+    "id": "a0b8a897-3c6c-4d30-8f69-3039aa3411b8",
+    "userId": "04855985-1ce5-46c5-a2b4-66519cdf82c8",
+    "description": "tygyt",
+    "category": "Income",
+    "amount": 78776,
+    "date": "2024-07-11"
+  },
+  {
+    "id": "e30b9b9c-b63f-4505-9d46-9955065292ca",
+    "userId": "04855985-1ce5-46c5-a2b4-66519cdf82c8",
+    "description": "hhu",
+    "category": "Expense",
+    "amount": 88888,
+    "date": "2024-07-26"
+  }
+]

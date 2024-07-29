@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -20,6 +20,14 @@ const Login = () => {
   const navigate = useNavigate();
   const [login, { error, loading }] = useMutation(LOGIN_MUTATION);
 
+  useEffect(() => {
+    // Check if the user is already logged in
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/dashboard');
+    }
+  }, [navigate]);
+
   const handleLogin = async () => {
     try {
       const { data } = await login({ variables: { username, password } });
@@ -32,22 +40,27 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form className="login-form">
-        <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+    <div>
+      
+      <div className="login-container">
+        <div className="login-header">Login</div>
+        <form className="login-form">
+          <div>
+            <label>Username:</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button type="button" className="login-button" onClick={handleLogin}>Login</button>
+        </form>
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">Login failed. Please try again.</p>}
+        <div className="register-link">
+          Don't have an account? <a href="/register">Register</a>
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="button" onClick={handleLogin}>Login</button>
-        <button type="button" onClick={() => navigate('/register')}>Register</button>
-      </form>
-      {loading && <p>Loading...</p>}
-      {error && <p className="error-message">Login failed. Please try again.</p>}
+      </div>
     </div>
   );
 };

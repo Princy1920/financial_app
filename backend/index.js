@@ -2,19 +2,21 @@ const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 
-const users = [
-  { id: '1', username: 'john_doe', password: 'password123', email: 'john@example.com' },
-  { id: '2', username: 'jane_smith', password: 'password456', email: 'jane@example.com' }
-];
+const usersFilePath = path.join(__dirname, 'users.json');
+const transactionsFilePath = path.join(__dirname, 'transactions.json');
 
-const transactions = [
-  { id: '1', userId: '1', description: 'Salary', category: 'Income', amount: 5000, date: '2023-06-01' },
-  { id: '2', userId: '1', description: 'Rent', category: 'Expense', amount: 1200, date: '2023-06-05' },
-  { id: '3', userId: '1', description: 'Groceries', category: 'Expense', amount: 300, date: '2023-06-10' },
-  { id: '4', userId: '2', description: 'Freelance Project', category: 'Income', amount: 1500, date: '2023-06-15' },
-  { id: '5', userId: '2', description: 'Utilities', category: 'Expense', amount: 200, date: '2023-06-20' }
-];
+// Helper functions to read and write JSON files
+const readJSONFile = (filePath) => {
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+};
+
+const writeJSONFile = (filePath, data) => {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+};
 
 const typeDefs = gql`
   type User {
@@ -46,44 +48,69 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    transactions: (_, { userId }) => transactions.filter(transaction => transaction.userId === userId),
-    transaction: (_, { id }) => transactions.find(transaction => transaction.id === id),
+    transactions: (_, { userId }) => {
+      const transactions = readJSONFile(transactionsFilePath);
+      return transactions.filter(transaction => transaction.userId === userId);
+    },
+    transaction: (_, { id }) => {
+      const transactions = readJSONFile(transactionsFilePath);
+      return transactions.find(transaction => transaction.id === id);
+    },
   },
   Mutation: {
     login: (_, { username, password }) => {
+      const users = readJSONFile(usersFilePath);
       const user = users.find(user => user.username === username && user.password === password);
       if (!user) throw new Error('Invalid credentials');
       const token = jwt.sign({ id: user.id, username: user.username }, 'your_secret_key', { expiresIn: '1h' });
       return { ...user, token };
     },
     register: (_, { username, email, password }) => {
-      const existingUser = users.find(user => user.username === username || user.email === email);
-      if (existingUser) throw new Error('User already exists');
-      const newUser = { id: String(users.length + 1), username, email, password };
-      users.push(newUser);
-      const token = jwt.sign({ id: newUser.id, username: newUser.username }, 'your_secret_key', { expiresIn: '1h' });
-      return { ...newUser, token };
+      try {
+        const users = readJSONFile(usersFilePath);
+        const existingUser = users.find(user => user.username === username || user.email === email);
+        if (existingUser) throw new Error('User already exists');
+        const newUser = { id: uuidv4(), username, email, password };
+        users.push(newUser);
+        writeJSONFile(usersFilePath, users);
+        const token = jwt.sign({ id: newUser.id, username: newUser.username }, 'your_secret_key', { expiresIn: '1h' });
+        return { ...newUser, token };
+      } catch (error) {
+        console.error('Registration error:', error);
+        throw new Error('Registration failed');
+      }
     },
     addTransaction: (_, { userId, description, category, amount, date }) => {
-      const newTransaction = { id: String(transactions.length + 1), userId, description, category, amount, date };
-      transactions.push(newTransaction);
-      return newTransaction;
+      try {
+        const transactions = readJSONFile(transactionsFilePath);
+        const newTransaction = { id: uuidv4(), userId, description, category, amount, date };
+        transactions.push(newTransaction);
+        writeJSONFile(transactionsFilePath, transactions);
+        return newTransaction;
+      } catch (error) {
+        console.error('Error adding transaction:', error);
+        throw new Error('Failed to add transaction');
+      }
     },
     editTransaction: (_, { id, description, category, amount, date }) => {
+      const transactions = readJSONFile(transactionsFilePath);
       const transaction = transactions.find(transaction => transaction.id === id);
       if (!transaction) throw new Error('Transaction not found');
       if (description !== undefined) transaction.description = description;
       if (category !== undefined) transaction.category = category;
       if (amount !== undefined) transaction.amount = amount;
       if (date !== undefined) transaction.date = date;
+      writeJSONFile(transactionsFilePath, transactions);
       return transaction;
     },
     deleteTransaction: (_, { id }) => {
+      let transactions = readJSONFile(transactionsFilePath);
       const transactionIndex = transactions.findIndex(transaction => transaction.id === id);
       if (transactionIndex === -1) throw new Error('Transaction not found');
-      transactions.splice(transactionIndex, 1);
+      transactions = transactions.filter(transaction => transaction.id !== id);
+      writeJSONFile(transactionsFilePath, transactions);
       return true;
-    }
+    },
   }
 };
 

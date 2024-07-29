@@ -34,24 +34,26 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      <div className="register-header">Register</div>
-      <form className="register-form">
-        <div>
-          <label>Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="button" onClick={handleRegister}>Register</button>
-      </form>
-      {loading && <p>Loading...</p>}
-      {error && <p className="error-message">Registration failed. Please try again.</p>}
+      <div className="register-box">
+        <div className="register-header">Register</div>
+        <form className="register-form">
+          <div className="form-group">
+            <label>Username:</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label>Email:</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button type="button" onClick={handleRegister} className="register-button">Register</button>
+        </form>
+        {loading && <p>Loading...</p>}
+        {error && <p className="error-message">Registration failed. Please try again.</p>}
+      </div>
     </div>
   );
 };
