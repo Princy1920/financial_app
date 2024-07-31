@@ -10,5 +10,17 @@
     "username": "princy",
     "email": "princy@gmail.com",
     "password": "123456"
+  },
+  {
+    "id": "4f99fc7f-4d5e-45ea-913d-1a8edc378c06",
+    "username": "aishuw",
+    "email": "aishuw@gmail.com",
+    "password": "pass"
+  },
+  {
+    "id": "3193b69d-c79b-4f4e-8edb-15050ac5753b",
+    "username": "swetha",
+    "email": "adc@gmail.com",
+    "password": "1234567"
   }
 ]

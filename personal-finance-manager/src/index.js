@@ -7,10 +7,10 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TransactionList from './components/TransactionList';
 import AddEditTransaction from './components/AddEditTransaction';
-import TransactionDetails from './components/TransactionDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
-import EditTransaction from './components/EditTransaction'; // Import EditTransaction
+import EditTransaction from './components/EditTransaction';
+import Report from './components/Report';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,8 +23,8 @@ ReactDOM.render(
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/transactions" element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
           <Route path="/transaction/new" element={<ProtectedRoute><AddEditTransaction /></ProtectedRoute>} />
-          <Route path="/transaction/details/:id" element={<ProtectedRoute><TransactionDetails /></ProtectedRoute>} />
-          <Route path="/transaction/edit/:id" element={<ProtectedRoute><EditTransaction /></ProtectedRoute>} /> {/* Add route for EditTransaction */}
+          <Route path="/transaction/edit/:id" element={<ProtectedRoute><EditTransaction /></ProtectedRoute>} />
+          <Route path="/report" element={<ProtectedRoute><Report /></ProtectedRoute>} />
         </Routes>
       </Router>
     </ApolloProvider>

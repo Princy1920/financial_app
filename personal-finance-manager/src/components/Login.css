@@ -3,14 +3,16 @@ body, html {
   padding: 0;
   font-family: 'Arial', sans-serif;
   height: 100%;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+  width: 100%;
+  background: url('D:\financial_app\personal-finance-manager\public\image2.jpg') no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .login-container {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
   padding: 40px;
   border-radius: 8px;
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);

@@ -1,26 +1,34 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Dashboard.css';
+import Header from './Header';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
+
+  const handleNavigation = (path) => {
+    navigate(path);
   };
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">Finance Dashboard</div>
-      <div className="navbar">
-        <Link to="/transactions" className="active">Transaction List</Link>
-        <Link to="/transaction/new">Add/Edit Transaction</Link>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-      <div className="welcome-message">
-        Welcome to your finance dashboard
+    <div className="dashboard">
+      <Header />
+      <div className="card-container">
+        <div className="nav-card" onClick={() => handleNavigation('/transactions')}>
+          <img src="image5.png" alt="Transaction List Icon" />
+          <span>Transaction List</span>
+          <button onClick={() => handleNavigation('/transactions')}>Go!</button>
+        </div>
+        <div className="nav-card" onClick={() => handleNavigation('/transaction/new')}>
+          <img src="image5.png" alt="Add Transaction Icon" />
+          <span>Add Transaction</span>
+          <button onClick={() => handleNavigation('/transaction/new')}>Go!</button>
+        </div>
+        <div className="nav-card" onClick={() => handleNavigation('/report')}>
+          <img src="image5.png" alt="Report Icon" />
+          <span>Report</span>
+          <button onClick={() => handleNavigation('/report')}>Go!</button>
+        </div>
       </div>
     </div>
   );
