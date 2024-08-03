@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
-const REGISTER_MUTATION = gql`
+export const REGISTER_MUTATION = gql`
   mutation Register($username: String!, $email: String!, $password: String!) {
     register(username: $username, email: $email, password: $password) {
       id
@@ -38,21 +38,44 @@ const Register = () => {
         <div className="register-header">Register</div>
         <form className="register-form">
           <div className="form-group">
-            <label>Username:</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <label htmlFor="username">Username:</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
           <div className="form-group">
-            <label>Email:</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <label htmlFor="email">Email:</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
           <div className="form-group">
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <label htmlFor="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <button type="button" onClick={handleRegister} className="register-button">Register</button>
+          <button
+            type="button"
+            onClick={handleRegister}
+            className="register-button"
+          >
+            Register
+          </button>
         </form>
         {loading && <p>Loading...</p>}
-        {error && <p className="error-message">Registration failed. Please try again.</p>}
+        {error && (
+          <p className="error-message">Registration failed: {error.message}</p>
+        )}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-const LOGIN_MUTATION = gql`
+export const LOGIN_MUTATION = gql`
   mutation Login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       id
@@ -41,17 +41,16 @@ const Login = () => {
 
   return (
     <div>
-      
       <div className="login-container">
         <div className="login-header">Login</div>
         <form className="login-form">
           <div>
-            <label>Username:</label>
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <label htmlFor="username">Username:</label>
+            <input id="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <label htmlFor="password">Password:</label>
+            <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <button type="button" className="login-button" onClick={handleLogin}>Login</button>
         </form>

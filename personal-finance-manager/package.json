@@ -5,8 +5,10 @@
   "dependencies": {
     "@apollo/client": "^3.10.8",
     "@apollo/react-hooks": "^4.0.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.6",
+    "@mui/material": "^5.16.6",
     "@testing-library/user-event": "^13.5.0",
     "apollo-client": "^2.6.10",
     "graphql": "^15.9.0",
@@ -43,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "jest": "^27.5.1"
   }
 }

@@ -6,7 +6,7 @@ import client from './apolloClient';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import TransactionList from './components/TransactionList';
-import AddEditTransaction from './components/AddEditTransaction';
+import AddTransaction from './components/AddTransaction';
 import ProtectedRoute from './components/ProtectedRoute';
 import Register from './components/Register';
 import EditTransaction from './components/EditTransaction';
@@ -22,7 +22,7 @@ ReactDOM.render(
           <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/transactions" element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
-          <Route path="/transaction/new" element={<ProtectedRoute><AddEditTransaction /></ProtectedRoute>} />
+          <Route path="/transaction/new" element={<ProtectedRoute><AddTransaction /></ProtectedRoute>} />
           <Route path="/transaction/edit/:id" element={<ProtectedRoute><EditTransaction /></ProtectedRoute>} />
           <Route path="/report" element={<ProtectedRoute><Report /></ProtectedRoute>} />
         </Routes>

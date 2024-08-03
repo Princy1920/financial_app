@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { useNavigate, useParams } from 'react-router-dom';
-import './EditTransaction.css';
+import { Container, TextField, Button, Card, CardContent, Typography, Box, MenuItem } from '@mui/material';
 
-const EDIT_TRANSACTION_MUTATION = gql`
+export const EDIT_TRANSACTION_MUTATION = gql`
   mutation EditTransaction($id: ID!, $description: String, $category: String, $amount: Float, $date: String) {
     editTransaction(id: $id, description: $description, category: $category, amount: $amount, date: $date) {
       id
@@ -15,7 +15,7 @@ const EDIT_TRANSACTION_MUTATION = gql`
   }
 `;
 
-const TRANSACTION_QUERY = gql`
+export const TRANSACTION_QUERY = gql`
   query Transaction($id: ID!) {
     transaction(id: $id) {
       id
@@ -31,7 +31,7 @@ const EditTransaction = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Expense');
   const [amount, setAmount] = useState(0);
   const [date, setDate] = useState('');
 
@@ -57,28 +57,52 @@ const EditTransaction = () => {
   };
 
   return (
-    <div className="edit-transaction-container">
-      <h2>Edit Transaction</h2>
-      <form className="edit-transaction-form">
-        <div>
-          <label>Description:</label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-        </div>
-        <div>
-          <label>Category:</label>
-          <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
-        </div>
-        <div>
-          <label>Amount:</label>
-          <input type="number" value={amount} onChange={(e) => setAmount(parseFloat(e.target.value))} />
-        </div>
-        <div>
-          <label>Date:</label>
-          <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-        </div>
-        <button type="button" onClick={handleSaveTransaction}>Save</button>
-      </form>
-    </div>
+    <Container maxWidth="sm">
+      <Card>
+        <CardContent>
+          <Typography variant="h4" gutterBottom>Edit Transaction</Typography>
+          <Box component="form" noValidate autoComplete="off">
+            <TextField
+              fullWidth
+              label="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              margin="normal"
+            />
+            <TextField
+              select
+              fullWidth
+              label="Category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              margin="normal"
+            >
+              <MenuItem value="Income">Income</MenuItem>
+              <MenuItem value="Expense">Expense</MenuItem>
+            </TextField>
+            <TextField
+              type="number"
+              fullWidth
+              label="Amount"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              margin="normal"
+            />
+            <TextField
+              type="date"
+              fullWidth
+              label="Date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              margin="normal"
+            />
+            <Button variant="contained" color="primary" onClick={handleSaveTransaction} sx={{ mt: 2 }}>
+              Save
+            </Button>
+          </Box>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
