@@ -41,9 +41,13 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
 }));
 
 const RootContainer = styled(Container)(({ theme }) => ({
-  marginTop: -100, // Adjust this as needed to reduce the space at the top
+  marginTop: theme.spacing(4),
   marginBottom: theme.spacing(4),
   maxWidth: 1200,
+  backgroundColor: 'white', // Semi-transparent background color
+  padding: theme.spacing(2),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[3],
   '& .MuiButton-root': {
     margin: theme.spacing(1),
   },
@@ -53,9 +57,8 @@ const RootContainer = styled(Container)(({ theme }) => ({
   },
 }));
 
-// Add a new styled component for spacing between the filters and the table
 const FilterContainer = styled('div')(({ theme }) => ({
-  marginBottom: theme.spacing(3), // This adds space between the filters and the table
+  marginBottom: theme.spacing(3),
 }));
 
 const TransactionListView = () => {
@@ -72,7 +75,7 @@ const TransactionListView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (data) {
+    if (data && data.transactions) {
       setTransactions(data.transactions);
     }
   }, [data]);
@@ -92,6 +95,7 @@ const TransactionListView = () => {
 
   if (loading) return <Typography>Loading...</Typography>;
   if (error) return <Typography color="error">Error: {error.message}</Typography>;
+  if (!data || !data.transactions) return <Typography>No transactions found.</Typography>;
 
   const filteredTransactions = transactions.filter(
     (t) => {
@@ -105,94 +109,94 @@ const TransactionListView = () => {
 
   return (
     <RootContainer maxWidth="lg">
-    <Typography variant="h4" gutterBottom component="div" align="left">
-      Transaction List
-    </Typography>
-    <Button onClick={() => setView('Income')} color="primary">
-      Income
-    </Button>
-    <Button onClick={() => setView('Expense')} color="secondary">
-      Expenses
-    </Button>
-    <TextField
-      label="Search"
-      variant="outlined"
-      fullWidth
-      margin="normal"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-    />
-    <Grid container spacing={2} alignItems="center">
-      <Grid item xs={6}>
-        <FormControl fullWidth>
-          <InputLabel>Month</InputLabel>
-          <Select
-            value={selectedMonth}
-            label="Month"
-            onChange={(e) => setSelectedMonth(e.target.value)}
-          >
-            {Array.from({ length: 12 }, (_, i) => (
-              <MenuItem key={i + 1} value={i + 1}>
-                {new Date(0, i).toLocaleString('default', { month: 'long' })}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Grid>
-      <Grid item xs={6}>
-        <FormControl fullWidth>
-          <InputLabel>Year</InputLabel>
-          <Select
-            value={selectedYear}
-            label="Year"
-            onChange={(e) => setSelectedYear(e.target.value)}
-          >
-            {Array.from(new Array(20), (_, i) => {
-              const year = new Date().getFullYear() - i;
-              return (
-                <MenuItem key={year} value={year}>
-                  {year}
+      <Typography variant="h4" gutterBottom component="div" align="left">
+        Transaction List
+      </Typography>
+      <Button onClick={() => setView('Income')} color="primary">
+        Income
+      </Button>
+      <Button onClick={() => setView('Expense')} color="secondary">
+        Expenses
+      </Button>
+      <TextField
+        label="Search"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={6}>
+          <FormControl fullWidth>
+            <InputLabel>Month</InputLabel>
+            <Select
+              value={selectedMonth}
+              label="Month"
+              onChange={(e) => setSelectedMonth(e.target.value)}
+            >
+              {Array.from({ length: 12 }, (_, i) => (
+                <MenuItem key={i + 1} value={i + 1}>
+                  {new Date(0, i).toLocaleString('default', { month: 'long' })}
                 </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl fullWidth>
+            <InputLabel>Year</InputLabel>
+            <Select
+              value={selectedYear}
+              label="Year"
+              onChange={(e) => setSelectedYear(e.target.value)}
+            >
+              {Array.from(new Array(20), (_, i) => {
+                const year = new Date().getFullYear() - i;
+                return (
+                  <MenuItem key={year} value={year}>
+                    {year}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </Grid>
       </Grid>
-    </Grid>
-    <Paper elevation={3}>
-      <StyledTableContainer component={Paper}>
-        <Table stickyHeader aria-label={`${view} transactions`}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Amount</TableCell>
-              <TableCell align="right">Date</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredTransactions.map((transaction) => (
-              <TableRow key={transaction.id}>
-                <TableCell component="th" scope="row">
-                  {transaction.description}
-                </TableCell>
-                <TableCell align="right">{transaction.amount.toFixed(2)}</TableCell>
-                <TableCell align="right">{new Date(transaction.date).toLocaleDateString()}</TableCell>
-                <TableCell align="center">
-                  <IconButton size="small" onClick={() => handleEdit(transaction.id)} color="primary" aria-label="edit">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton size="small" onClick={() => handleDelete(transaction.id)} color="error" aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
+      <Paper elevation={3}>
+        <StyledTableContainer component={Paper}>
+          <Table stickyHeader aria-label={`${view} transactions`}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Description</TableCell>
+                <TableCell align="right">Amount</TableCell>
+                <TableCell align="right">Date</TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </StyledTableContainer>
-    </Paper>
-  </RootContainer>
+            </TableHead>
+            <TableBody>
+              {filteredTransactions.map((transaction) => (
+                <TableRow key={transaction.id}>
+                  <TableCell component="th" scope="row">
+                    {transaction.description}
+                  </TableCell>
+                  <TableCell align="right">{transaction.amount.toFixed(2)}</TableCell>
+                  <TableCell align="right">{new Date(transaction.date).toLocaleDateString()}</TableCell>
+                  <TableCell align="center">
+                    <IconButton size="small" onClick={() => handleEdit(transaction.id)} color="primary" aria-label="edit">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton size="small" onClick={() => handleDelete(transaction.id)} color="error" aria-label="delete">
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </StyledTableContainer>
+      </Paper>
+    </RootContainer>
   );
 };
 

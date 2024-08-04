@@ -28,5 +28,35 @@
     "username": "Safrin",
     "email": "safrin.g@indiumsoft.com",
     "password": "1234567"
+  },
+  {
+    "id": "732bb5e2-30b8-4b12-a835-a88801be4c1a",
+    "username": "priyaa",
+    "email": "priiya@gmail.com",
+    "password": "1234567"
+  },
+  {
+    "id": "d232d64f-e21f-4d53-879b-061e6e9616d4",
+    "username": "suriya",
+    "email": "adcd@gmail.com",
+    "password": "1234567"
+  },
+  {
+    "id": "6643b887-7f23-4282-8a0e-1a63fdbaa9f4",
+    "username": "priiyaa",
+    "email": "qwer@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "id": "95a095b6-3ef8-41e7-aee1-1c029517ad95",
+    "username": "Safrinn",
+    "email": "asdfg@gmail.com",
+    "password": "123456789"
+  },
+  {
+    "id": "4ed99d31-5fd7-4f04-b661-6e01c1c16c24",
+    "username": "renu",
+    "email": "princy123@gmail.com",
+    "password": "12345678"
   }
 ]

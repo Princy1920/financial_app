@@ -32,6 +32,18 @@ const registerMock = {
   },
 };
 
+const errorMock = {
+  request: {
+    query: REGISTER_MUTATION,
+    variables: {
+      username: 'testuser',
+      email: 'testuser@example.com',
+      password: 'testpassword',
+    },
+  },
+  error: new Error('Registration failed'),
+};
+
 describe('Register Component', () => {
   test('should render Register component', () => {
     render(
@@ -65,31 +77,11 @@ describe('Register Component', () => {
     fireEvent.click(screen.getByRole('button', { name: /register/i }));
 
     await waitFor(() => {
-      expect(mockNavigate).toHaveBeenCalledWith('/dashboard');
-    });
-
-    expect(localStorage.getItem('token')).toBe('fake-token');
-    expect(JSON.parse(localStorage.getItem('user'))).toEqual({
-      id: '1',
-      username: 'testuser',
-      email: 'testuser@example.com',
-      token: 'fake-token',
+      expect(mockNavigate).toHaveBeenCalledWith('/login');
     });
   });
 
   test('should show loading and error messages', async () => {
-    const errorMock = {
-      request: {
-        query: REGISTER_MUTATION,
-        variables: {
-          username: 'testuser',
-          email: 'testuser@example.com',
-          password: 'testpassword',
-        },
-      },
-      error: new Error('Registration failed'),
-    };
-
     render(
       <MockedProvider mocks={[errorMock]} addTypename={false}>
         <Router>

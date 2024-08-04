@@ -53,7 +53,7 @@ describe('Report', () => {
       </MockedProvider>
     );
 
-    expect(await screen.findByText(/monthly report/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Transaction Report/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/select month/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/select year/i)).toBeInTheDocument();
     expect(screen.getByText(/salary/i)).toBeInTheDocument();

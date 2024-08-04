@@ -15,7 +15,7 @@ export const ADD_TRANSACTION_MUTATION = gql`
   }
 `;
 
-const AddTransaction = () => {
+const AddEditTransaction = () => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('Income');
   const [amount, setAmount] = useState(0);
@@ -73,6 +73,7 @@ const AddTransaction = () => {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               margin="normal"
+              InputLabelProps={{ shrink: true }}
             />
             <Button variant="contained" color="primary" onClick={handleAddTransaction} sx={{ mt: 2 }}>
               Save
@@ -85,4 +86,4 @@ const AddTransaction = () => {
   );
 };
 
-export default AddTransaction;
+export default AddEditTransaction;

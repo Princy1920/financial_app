@@ -70,5 +70,37 @@
     "category": "Income",
     "amount": 9000,
     "date": "2024-08-08"
+  },
+  {
+    "id": "042cfa93-22e0-4e87-bf9e-c9efe5d94794",
+    "userId": "95a095b6-3ef8-41e7-aee1-1c029517ad95",
+    "description": "dfdfg",
+    "category": "Income",
+    "amount": 6789,
+    "date": "2024-08-23"
+  },
+  {
+    "id": "ec0cd1c8-8fca-45f6-ba37-763a4c5c6395",
+    "userId": "95a095b6-3ef8-41e7-aee1-1c029517ad95",
+    "description": "fg",
+    "category": "Expense",
+    "amount": 900,
+    "date": "2024-08-09"
+  },
+  {
+    "id": "d1f03797-e8f2-4306-8b2a-04f30f42de92",
+    "userId": "4ed99d31-5fd7-4f04-b661-6e01c1c16c24",
+    "description": "salary",
+    "category": "Income",
+    "amount": 300000,
+    "date": "2024-08-01"
+  },
+  {
+    "id": "b2e263d9-aa0a-41da-958d-1fa7b44f91c8",
+    "userId": "4ed99d31-5fd7-4f04-b661-6e01c1c16c24",
+    "description": "egg",
+    "category": "Expense",
+    "amount": 80,
+    "date": "2024-08-01"
   }
 ]

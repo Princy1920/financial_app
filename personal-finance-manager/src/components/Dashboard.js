@@ -13,7 +13,7 @@ const FullScreenBox = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
-  backgroundImage: 'url("/api/placeholder/1920/1080")', // Placeholder for background image
+  // backgroundImage: 'url("/api/placeholder/1920/1080")', // Placeholder for background image
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 });
@@ -24,7 +24,7 @@ const ContentBox = styled(Box)({
   alignItems: 'center',
   justifyContent: 'center',
   padding: '32px',
-  backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white overlay
+  // backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white overlay
 });
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -75,7 +75,7 @@ const Dashboard = () => {
       <AppBar position="static" elevation={0} sx={{ backgroundColor: '#1a2224' }}>
         <Toolbar>
           <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-          FinTracker
+           FinTracker
           </Typography>
           <IconButton color="inherit" aria-label="logout" onClick={handleLogout}>
             <LogoutIcon />

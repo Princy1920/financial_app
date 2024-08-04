@@ -19,7 +19,7 @@ describe('Dashboard', () => {
     );
 
     // Check if the Dashboard elements are rendered
-    expect(screen.getByText(/finance manager/i)).toBeInTheDocument();
+    expect(screen.getByText(/FinTracker/i)).toBeInTheDocument();
     expect(screen.getByText(/transaction list/i)).toBeInTheDocument();
     expect(screen.getByText(/add transaction/i)).toBeInTheDocument();
     expect(screen.getByText(/report/i)).toBeInTheDocument();

@@ -18,15 +18,23 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [registrationError, setRegistrationError] = useState('');
   const navigate = useNavigate();
-  const [register, { error, loading }] = useMutation(REGISTER_MUTATION);
+  const [register, { loading }] = useMutation(REGISTER_MUTATION, {
+    onError: (err) => {
+      setRegistrationError('Registration failed: ' + err.message);
+    }
+  });
 
   const handleRegister = async () => {
+    if (password.length < 8) {
+      setPasswordError('Password must be at least 8 characters long.');
+      return;
+    }
     try {
       const { data } = await register({ variables: { username, email, password } });
-      localStorage.setItem('token', data.register.token);
-      localStorage.setItem('user', JSON.stringify(data.register));
-      navigate('/dashboard');
+      navigate('/login'); // Redirect to login page
     } catch (err) {
       console.error('Error registering:', err);
     }
@@ -73,9 +81,7 @@ const Register = () => {
           </button>
         </form>
         {loading && <p>Loading...</p>}
-        {error && (
-          <p className="error-message">Registration failed: {error.message}</p>
-        )}
+        {registrationError && <p className="error-message">{registrationError}</p>}
       </div>
     </div>
   );

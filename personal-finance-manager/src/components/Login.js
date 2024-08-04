@@ -52,7 +52,9 @@ const Login = () => {
             <label htmlFor="password">Password:</label>
             <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          <div className="login-button-container">
           <button type="button" className="login-button" onClick={handleLogin}>Login</button>
+        </div>
         </form>
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">Login failed. Please try again.</p>}

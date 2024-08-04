@@ -60,6 +60,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
   marginBottom: theme.spacing(4),
   maxWidth: 1200,
+  backgroundColor: 'white',
   '& .MuiButton-root': {
     margin: theme.spacing(1),
   },
@@ -157,7 +158,7 @@ const Report = () => {
   return (
     <RootContainer maxWidth="lg">
       <Typography variant="h4" gutterBottom component="div" align="center">
-        Monthly Report
+        Transaction Report
       </Typography>
       <Grid container spacing={2} justifyContent="center" alignItems="center" sx={{ mb: 4 }}>
   <Grid item>
