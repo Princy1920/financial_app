@@ -102,5 +102,29 @@
     "category": "Expense",
     "amount": 80,
     "date": "2024-08-01"
+  },
+  {
+    "id": "bf595283-17ed-420b-9ebd-ab2c4181aba5",
+    "userId": "a7020cb4-0072-44f0-960f-8c88e7cd702f",
+    "description": "sdfaaf",
+    "category": "Income",
+    "amount": 600000,
+    "date": "2024-08-02"
+  },
+  {
+    "id": "1e9eaa25-3d6d-4cef-b767-388aab38fcc9",
+    "userId": "5db0d1cd-9e5e-49dc-8e3a-e86d500ebbcf",
+    "description": "salary",
+    "category": "Income",
+    "amount": 90000,
+    "date": "2024-08-01"
+  },
+  {
+    "id": "17afaaf2-eefa-484c-82b8-e86651d7d3f8",
+    "userId": "5db0d1cd-9e5e-49dc-8e3a-e86d500ebbcf",
+    "description": "salary",
+    "category": "Income",
+    "amount": 80000,
+    "date": "2024-08-01"
   }
 ]

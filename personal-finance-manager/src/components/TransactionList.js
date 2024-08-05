@@ -65,8 +65,8 @@ const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [view, setView] = useState('Income');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [selectedYear, setSelectedYear] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'));
   const { loading, error, data } = useQuery(TRANSACTIONS_QUERY, {
     variables: { userId: user.id },
@@ -97,15 +97,15 @@ const TransactionList = () => {
   if (error) return <Typography color="error">Error: {error.message}</Typography>;
   if (!data || !data.transactions) return <Typography>No transactions found.</Typography>;
 
-  const filteredTransactions = transactions.filter(
-    (t) => {
-      const transactionDate = new Date(t.date);
-      return t.category === view &&
-             t.description.toLowerCase().includes(searchQuery.toLowerCase()) &&
-             transactionDate.getMonth() + 1 === selectedMonth &&
-             transactionDate.getFullYear() === selectedYear;
-    }
-  );
+  const filteredTransactions = transactions.filter((t) => {
+    const transactionDate = new Date(t.date);
+    const matchesMonth = selectedMonth ? transactionDate.getMonth() + 1 === selectedMonth : true;
+    const matchesYear = selectedYear ? transactionDate.getFullYear() === selectedYear : true;
+    const matchesView = t.category === view;
+    const matchesSearchQuery = t.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesMonth && matchesYear && matchesView && matchesSearchQuery;
+  });
 
   return (
     <RootContainer maxWidth="lg">
@@ -131,10 +131,13 @@ const TransactionList = () => {
           <FormControl fullWidth>
             <InputLabel>Month</InputLabel>
             <Select
-              value={selectedMonth}
+              value={selectedMonth || ''}
               label="Month"
               onChange={(e) => setSelectedMonth(e.target.value)}
             >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               {Array.from({ length: 12 }, (_, i) => (
                 <MenuItem key={i + 1} value={i + 1}>
                   {new Date(0, i).toLocaleString('default', { month: 'long' })}
@@ -147,10 +150,13 @@ const TransactionList = () => {
           <FormControl fullWidth>
             <InputLabel>Year</InputLabel>
             <Select
-              value={selectedYear}
+              value={selectedYear || ''}
               label="Year"
               onChange={(e) => setSelectedYear(e.target.value)}
             >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               {Array.from(new Array(20), (_, i) => {
                 const year = new Date().getFullYear() - i;
                 return (

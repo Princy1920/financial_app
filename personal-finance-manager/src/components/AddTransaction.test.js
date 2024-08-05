@@ -45,7 +45,7 @@ describe('AddTransaction', () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <BrowserRouter>
-          <AddEditTransaction />
+          <AddTransaction />
         </BrowserRouter>
       </MockedProvider>
     );
