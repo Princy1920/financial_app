@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor, within } from '@testing-library/rea
 import '@testing-library/jest-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import { BrowserRouter } from 'react-router-dom';
-import AddEditTransaction, { ADD_TRANSACTION_MUTATION } from './AddEditTransaction';
+import AddTransaction, { ADD_TRANSACTION_MUTATION } from './AddTransaction';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -11,7 +11,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('AddEditTransaction', () => {
+describe('AddTransaction', () => {
   it('renders Add Transaction form and submits correctly', async () => {
     const mockUser = { id: '1' };
     localStorage.setItem('user', JSON.stringify(mockUser));

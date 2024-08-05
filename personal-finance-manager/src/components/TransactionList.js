@@ -61,7 +61,7 @@ const FilterContainer = styled('div')(({ theme }) => ({
   marginBottom: theme.spacing(3),
 }));
 
-const TransactionListView = () => {
+const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [view, setView] = useState('Income');
   const [searchQuery, setSearchQuery] = useState('');
@@ -200,4 +200,4 @@ const TransactionListView = () => {
   );
 };
 
-export default TransactionListView;
+export default TransactionList;
