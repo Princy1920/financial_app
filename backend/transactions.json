@@ -1,21 +1,5 @@
 [
   {
-    "id": "0ae5a318-41a2-4ca9-a98f-091d1f866797",
-    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
-    "description": "salary",
-    "category": "Income",
-    "amount": 6000,
-    "date": "2024-07-02"
-  },
-  {
-    "id": "99518d6d-729d-49fd-9808-353a11d4422e",
-    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
-    "description": "rent",
-    "category": "Expense",
-    "amount": 200,
-    "date": "2024-07-03"
-  },
-  {
     "id": "9c2660cb-8fea-4fdc-ad35-a29fe6aff765",
     "userId": "04855985-1ce5-46c5-a2b4-66519cdf82c8",
     "description": "egg",
@@ -126,5 +110,45 @@
     "category": "Income",
     "amount": 80000,
     "date": "2024-08-01"
+  },
+  {
+    "id": "040e5831-4a87-49c3-ad4d-e6bec9290dcd",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "salaryyy",
+    "category": "Income",
+    "amount": 90000,
+    "date": "2024-08-01"
+  },
+  {
+    "id": "5f25c48c-dc16-4f1e-8b6c-e67a5032595b",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "rent",
+    "category": "Expense",
+    "amount": 900,
+    "date": "2024-08-02"
+  },
+  {
+    "id": "4beccf53-55c1-4609-b3cb-e0d7cdf9fb3b",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "egg",
+    "category": "Expense",
+    "amount": 30,
+    "date": "2024-08-03"
+  },
+  {
+    "id": "5067fdd0-cc2b-47ab-a55e-9ae862f81b04",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "potato",
+    "category": "Expense",
+    "amount": 90,
+    "date": "2024-08-04"
+  },
+  {
+    "id": "a1193b96-f539-46e4-a7fd-473b8a848825",
+    "userId": "9cd8d5ae-4485-45da-aac7-476d7a9076fc",
+    "description": "food",
+    "category": "Expense",
+    "amount": 100,
+    "date": "2024-08-07"
   }
 ]

@@ -18,57 +18,9 @@
     "password": "pass"
   },
   {
-    "id": "3193b69d-c79b-4f4e-8edb-15050ac5753b",
-    "username": "swetha",
+    "id": "850609c6-6061-476f-9c8d-300be0323e79",
+    "username": "setha",
     "email": "adc@gmail.com",
-    "password": "1234567"
-  },
-  {
-    "id": "3788f6f3-ee24-4aa2-ac49-ace622c30884",
-    "username": "Safrin",
-    "email": "safrin.g@indiumsoft.com",
-    "password": "1234567"
-  },
-  {
-    "id": "732bb5e2-30b8-4b12-a835-a88801be4c1a",
-    "username": "priyaa",
-    "email": "priiya@gmail.com",
-    "password": "1234567"
-  },
-  {
-    "id": "d232d64f-e21f-4d53-879b-061e6e9616d4",
-    "username": "suriya",
-    "email": "adcd@gmail.com",
-    "password": "1234567"
-  },
-  {
-    "id": "6643b887-7f23-4282-8a0e-1a63fdbaa9f4",
-    "username": "priiyaa",
-    "email": "qwer@gmail.com",
-    "password": "12345678"
-  },
-  {
-    "id": "95a095b6-3ef8-41e7-aee1-1c029517ad95",
-    "username": "Safrinn",
-    "email": "asdfg@gmail.com",
-    "password": "123456789"
-  },
-  {
-    "id": "4ed99d31-5fd7-4f04-b661-6e01c1c16c24",
-    "username": "renu",
-    "email": "princy123@gmail.com",
-    "password": "12345678"
-  },
-  {
-    "id": "a7020cb4-0072-44f0-960f-8c88e7cd702f",
-    "username": "hello",
-    "email": "hello@gmail.com",
-    "password": "123456789"
-  },
-  {
-    "id": "5db0d1cd-9e5e-49dc-8e3a-e86d500ebbcf",
-    "username": "hellow",
-    "email": "asdf@gmail.com",
     "password": "12345678"
   }
 ]

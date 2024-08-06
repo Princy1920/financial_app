@@ -81,6 +81,7 @@ const Register = () => {
           </button>
         </form>
         {loading && <p>Loading...</p>}
+        {passwordError && <p className="error-message">{passwordError}</p>}
         {registrationError && <p className="error-message">{registrationError}</p>}
       </div>
     </div>

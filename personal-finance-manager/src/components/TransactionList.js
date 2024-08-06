@@ -71,7 +71,9 @@ const TransactionList = () => {
   const { loading, error, data } = useQuery(TRANSACTIONS_QUERY, {
     variables: { userId: user.id },
   });
-  const [deleteTransaction] = useMutation(DELETE_TRANSACTION_MUTATION);
+  const [deleteTransaction] = useMutation(DELETE_TRANSACTION_MUTATION, {
+    refetchQueries: [{ query: TRANSACTIONS_QUERY, variables: { userId: user.id } }],
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
